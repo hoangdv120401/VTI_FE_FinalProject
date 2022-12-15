@@ -1,0 +1,166 @@
+<div class="container-lg">
+    <div class="table-responsive">
+        <div class="table-wrapper">
+            <div class="alert alert-success" style="display: none;" id="alert-success">
+                <strong>Success!</strong>
+                <span id="content"></span>
+            </div>
+            <div class="table-title">
+                <div class="row">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="search by name..."
+                            aria-label="Recipient's username" aria-describedby="basic-addon2" id="contentSearchDept"
+                            onkeypress="handleEnterEventDept(event)">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button"
+                                onclick="handleSearchDept()">search</button>
+                        </div>
+                    </div>
+                    <div class="col-sm-8">
+                        <h2>Department <b>Details</b></h2>
+                    </div>
+                    <div class="col-sm-4">
+                        <button type="button" class="btn btn-info add-new" data-toggle="modal"
+                            onclick="openDeptAddModal()"><i class="fa fa-plus"></i> Add New</button>
+                        <button type="button" class="btn btn-danger add-new" data-toggle="modal"
+                            onclick="deleteAllCheckItem()"><i class="fa fa-trash"></i> Delete All</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        Min createdDate: <input type="date" name="minCreatedDate" id="minCreatedDate"
+                            onchange="changeMinCreatedDate(event)">
+                    </div>
+                    <div class="col-sm-4">
+                        Max createdDate: <input type="date" name="maxCreatedDate" id="maxCreatedDate"
+                            onchange="changeMaxCreatedDate(event)">
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-default btn-sm" onclick="refreshDeptTable()">
+                            <span class="glyphicon glyphicon-refresh"></span> Refresh
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th><input type="checkbox" id="check-all" name="check-all" onclick="onClickDelAllDept()">
+                        </th>
+                        <th>Name <i class="fa fa-fw fa-sort" id="heading-name" onclick="sortByField('name')"></i></th>
+                        <th>Total Member <i class="fa fa-fw fa-sort" id="heading-type"
+                                onclick="sortByField('type')"></i></th>
+                        <th>Type <i class="fa fa-fw fa-sort" id="heading-totalMember"
+                                onclick="sortByField('totalMember')"></i></th>
+                        <th>Created Date <i class="fa fa-fw fa-sort" id="heading-createdDate"
+                                onclick="sortByField('createdDate')"></i></th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody-all-dept">
+                    <!-- <tr>
+                        <td>John Doe</td>
+                        <td>Administration</td>
+                        <td>(171) 555-2222</td>
+                        <td>
+                            <a class="add" title="Add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
+                            <a class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                            <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Peter Parker</td>
+                        <td>Customer Service</td>
+                        <td>(313) 555-5735</td>
+                        <td>
+                            <a class="add" title="Add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
+                            <a class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                            <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Fran Wilson</td>
+                        <td>Human Resources</td>
+                        <td>(503) 555-9931</td>
+                        <td>
+                            <a class="add" title="Add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
+                            <a class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                            <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+                        </td>
+                    </tr>       -->
+                </tbody>
+            </table>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination" id="pagination">
+                    <!-- <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                  <li class="page-item"><a class="page-link" href="#">1</a></li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  <li class="page-item"><a class="page-link" href="#">Next</a></li> -->
+                </ul>
+            </nav>
+        </div>
+        <div id="myModal" class="modal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add Department</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal"
+                            onclick="hideModal()">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" name="id" id="id">
+                        <label for="name"><b>Name</b></label>
+                        <input type="text" placeholder="Enter Name" name="name" id="name" required>
+                        <p id="validateDeptName" style="color: red;"></p>
+
+                        <label for="type"><b>Type</b></label>
+                        <!-- <input type="text" placeholder="Enter Type" name="type" id="type" required> -->
+                        <select class="form-select" aria-label="Default select example" id="type">
+                            <option value="Dev" >Developer</option>
+                            <option value="Test">Test</option>
+                            <option value="ScrumMaster">ScrumMaster</option>
+                            <option value="Pm">project Manager</option>
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                        onclick="onclickAddAccounts()" >Add Accounts</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                            onclick="hideModal()">Cancel</button>
+                        <button type="button" class="btn btn-primary" onclick="saveDept()">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal" id="modalAddAccount">
+            <div class="modal-dialog modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Modal Heading</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th><input type="checkbox" id="check-allAddEmModal" name="check-all" onclick="ocModalCheckAll()"></th>
+                                    <th>Username</th>
+                                    <th>Fullname</th>
+                                    <th>Role</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody-modal-add-account">
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" onclick="saveEmModal()">Save</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="closeEmModal()">Close</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

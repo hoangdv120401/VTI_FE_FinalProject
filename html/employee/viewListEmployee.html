@@ -1,0 +1,101 @@
+<div class="container-lg">
+    <div class="table-responsive">
+        <div class="table-wrapper">
+            <div class="alert alert-success" style="display: none;" id="alert-success">
+                <strong>Success!</strong>
+                <span id="content"></span>
+            </div>
+            <div class="table-title">
+                <div class="row">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="search by name..."
+                            aria-label="Recipient's username" aria-describedby="basic-addon2" id="contentSearchEm"
+                            onkeypress="handleEnterEventEm(event)">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button"
+                                onclick="handleSearchEm()">search</button>
+                        </div>
+                    </div>
+                    <div class="col-sm-8">
+                        <h2>Employee <b>Details</b></h2>
+                    </div>
+                    <div class="col-sm-4">
+                        <button type="button" class="btn btn-info add-new" data-toggle="modal"
+                            onclick="openAddModal()"><i class="fa fa-plus"></i> Add New</button>
+                        <button type="button" class="btn btn-danger add-new" data-toggle="modal"
+                            onclick="deleteAllAccounts()"><i class="fa fa-trash"></i> Delete All</button>
+                        <!-- <button onclick="showModal()">Thanh</button> -->
+                    </div>
+                </div>
+            </div>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th><input type="checkbox" id="check-all" name="check-all" onclick="onClickDelAllAcc()">
+                        <th>Username <i class="fa fa-fw fa-sort" id="heading-username"
+                            onclick="sortByFieldEm('username')"></th>
+                        <th>Full Name <i class="fa fa-fw fa-sort" id="heading-fullName"
+                            onclick="sortByFieldEm('fullName')"></th>
+                        <th>Role <i class="fa fa-fw fa-sort" id="heading-role"
+                            onclick="sortByFieldEm('role')"></th>
+                        <th>Department <i class="fa fa-fw fa-sort" id="heading-departmentId"
+                            onclick="sortByFieldEm('departmentId')"></th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination" id="pagination">
+                </ul>
+            </nav>
+        </div>
+        <div id="myModal" class="modal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add Employee</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal"
+                            onclick="hideModal()">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" name="id" id="id">
+                        <label for="username"><b>Username</b></label>
+                        <input type="text" placeholder="Enter Name" name="username" id="username" required>
+                        <p id="valUsernameEm" style="color: red; display: none;"></p>
+                        <label for="firstName"><b>First Name</b></label>
+                        <input type="text" placeholder="Enter First Name" name="firstName" id="firstName" required>
+                        <p id="valid-firstName" style="color: red; display: none;"></p>
+                        <label for="lastName"><b>Last Name</b></label>
+                        <input type="text" placeholder="Enter Last Name" name="lastName" id="lastName" required>
+                        <p id="valid-lastName" style="color: red; display: none;"></p>
+                        <label for="role"><b>Role</b></label>
+                        <select class="form-select" aria-label="Default select example" id="role">
+                            <option value="EMPLOYEE">Employee</option>
+                            <option value="ADMIN">Admin</option>
+                            <option value="MANAGER">Manager</option>
+                        </select>
+                        <br>
+                        <!-- <label for="departmentId"><b>Department</b></label>
+                        <input type="text" placeholder="Enter Department ID" name="departmentId" id="departmentId"
+                            required> -->
+                        <label for="departmentId"><b>Department</b></label>
+                        <select class="form-select" aria-label="Default select example" id="departmentId">
+                            <!-- <option value="EMPLOYEE">Employee</option>
+                            <option value="ADMIN">Admin</option>
+                            <option value="MANAGER">Manager</option> -->
+                        </select>
+                        <p id="valid-department" style="color: red; display: none;"></p>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                            onclick="hideModal()">Cancel</button>
+                        <button type="button" class="btn btn-primary" onclick="save()">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="../css/register.css">
+
+    <script src="../js/jquery-3.6.1.min.js"></script>
+    <script src="../js/register.js"></script>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round|Open+Sans">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="alert alert-success" style="display: none;" id="alert-success">
+            <strong>Success!</strong>
+            <span id="content"></span>
+        </div>
+        <h3>Register</h3>
+        <p>Please fill in this form to create an account.</p>
+        <hr>
+
+        <label for="username"><b>Username</b></label>
+        <input type="text" placeholder="Enter Username" name="username" id="username" required>
+        <p id="valid-username" style="color: red; display: none;">Invalid Username</p>
+
+        <label for="psw"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
+        <p class="valid-psw" style="color: red; display: none;" > Invalid Password</p>
+
+        <label for="psw-repeat"><b>Repeat Password</b></label>
+        <input type="password" placeholder="Repeat Password" name="psw-repeat" id="psw-repeat" required>
+        <p class="valid-psw" style="color: red; display: none;">Invalid Password</p>
+
+        <label for="firstName"><b>FirstName</b></label>
+        <input type="text" placeholder="Enter FirstName" name="firstName" id="firstName" required>
+
+        <label for="lastName"><b>LastName</b></label>
+        <input type="text" placeholder="Enter LastName" name="lastName" id="lastName" required>
+        <hr>
+
+        <button type="button" class="registerbtn" onclick="registerAccount()">Register</button>
+    </div>
+
+    <div class="container signin">
+        <p>Already have an account? <a href="#" onclick="backToLogin()">Sign in</a>.</p>
+    </div>
+</body>
+
+</html>
